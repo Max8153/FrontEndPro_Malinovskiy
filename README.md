@@ -1,10 +1,9 @@
 # FrontEndPro_Malinovskiy
 
-Реалізуйте функцію removeElement(array, item), щоб видалити елемент item з масиву array.
+Реалізуйте функцію generateKey(length, characters), що повертає рядок випадкових символів із набору characters довжиною length.
 
 Наприклад:
 
-const array = [1, 2, 3, 4, 5, 6, 7];
-removeElement(array, 5);
-console.log(array);
-// Результат: [1, 2, 3, 4, 6, 7]
+const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+const key = generateKey(16, characters);
+console.log(key); // eg599gb60q926j8i
