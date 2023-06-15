@@ -1,18 +1,15 @@
-function pow(num, degree) {
-    switch (num) {
-        case 0: return 0;
-        break;
-        case 1: return 1;
+const calls = {
+    numbers: [],
+    cache: function(callback, ...addedNumbers) {
+        const savedNumbers = this.numbers
+        callback(savedNumbers, addedNumbers)
+        if (savedNumbers.length > 10) {
+            savedNumbers.splice(0, savedNumbers.length - 10)
+        }
     }
-    switch (true) {
-        case degree === 0: return 1;
-        break;
-        case degree === 1: return num;
-        break;
-        case degree > 1: return num*pow(num, --degree);
-        break;
-        case degree < 1: return 1/num*pow(num, ++degree);
-        default: return num;
-    }
-  }
-console.log(pow(2, 5));
+}
+function pushNumbers(arr, num) {
+    arr.push(...num)
+}
+calls.cache(pushNumbers, 111, 222, 333, 444, 555);
+console.log(calls, calls.numbers);
