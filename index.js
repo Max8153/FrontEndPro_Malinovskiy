@@ -52,7 +52,7 @@ switch (userChoice) {
 }
 console.log(cart);
 const amount = prompt("How many of this item are you going to buy?");
-if (isNaN(+amount)) {
+/*if (isNaN(+amount)) {
     console.log("You have to enter a number");
     }
 const fullCart = cart*amount;
@@ -60,4 +60,14 @@ if (fullCart > 10000) {
     console.log(`We made you a discount, your price is ${fullCart*0.8}`);
 } else {
     console.log(`Your price is ${fullCart}`);
+}*/
+function countPrice(price, amount) {
+    let finalPrice = cart*amount;
+    if (finalPrice > 10000) {
+    finalPrice = finalPrice*0.8;
+    console.log(`We made you a discount, your price is ${finalPrice}`);
+    } else {
+    console.log(`Your price is ${finalPrice}`); 
+    }
 }
+countPrice(userChoice, amount);
