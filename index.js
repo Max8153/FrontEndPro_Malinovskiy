@@ -1,96 +1,41 @@
-const store = [
-    {
-        position: 1,
-        name: "Keyboard",
-        priceInUAH: 2000,
-        color: "Black",
-        type: "Mechanics"
-    },
-    {
-        position: 2,
-        name: "Mouse",
-        priceInUAH: 600,
-        color: "Yellow",
-        DPI: 12000
-    },
-    {
-        position: 3,
-        name: "Monitor",
-        priceInUAH: 5000,
-        color: "Grey",
-        quality: "full HD"
-    },
-    {
-        position: 4,
-        name: "PC",
-        priceInUAH: 15000,
-        color: "White",
-        OS: "Windows"
-    },
-    {
-        position: 5,
-        name: "Headphones",
-        priceInUAH: 400,
-        color: "Yellow",
-        Microphone: "Yes"
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
     }
-];
-function addOrder(productId) {
-    const savedOrders = JSON.parse(localStorage.getItem("userOrders")) || [];
-    const date = new Date().toLocaleString();
-    const product = store.find(item => item.position === productId);
-    if (product) {
-        const order = {
-            date: date,
-            productId: productId
-        };
-        savedOrders.push(order);
-        localStorage.setItem("userOrders", JSON.stringify(savedOrders));
+    showPerson() {
+        console.log(`Hello ${this.name}, you are ${this.age} years old`)
     }
 }
-function showOrders() {
-    const savedOrders = JSON.parse(localStorage.getItem("userOrders")) || [];
-    const itemsToBuy = document.querySelector(".itemsToBuy");
-    itemsToBuy.style.display = "none";
-    const ordersContainer = document.createElement("div");
-    ordersContainer.classList.add("ordersContainer");
-    savedOrders.forEach(order => {
-        const orderElement = document.createElement("div");
-        orderElement.classList.add("order");
-        const productId = order.productId;
-        const product = store.find(item => item.position === productId);
-        if (product) {
-            const productName = product.name;
-            const productPrice = product.priceInUAH;
-
-            orderElement.innerHTML = `<p>Date: ${order.date}</p><p>Item: ${productName}</p><p>Price: ${productPrice} UAH</p>`;
-            const deleteButton = document.createElement("button");
-            deleteButton.innerText = "Remove";
-            deleteButton.addEventListener("click", () => deleteOrder(order));
-            orderElement.appendChild(deleteButton);
-
-            ordersContainer.appendChild(orderElement);
-        }
-    });
-    document.body.appendChild(ordersContainer);
-}
-function deleteOrder(order) {
-    const savedOrders = JSON.parse(localStorage.getItem("userOrders")) || [];
-    const index = savedOrders.findIndex(savedOrder => savedOrder.productId === order.productId);
-    if (index !== -1) {
-        savedOrders.splice(index, 1);
-        localStorage.setItem("userOrders", JSON.stringify(savedOrders));
+class Car {
+    constructor(brand, model, dateOfRelease, price, owner) {
+        this.brand = brand;
+        this.model = model;
+        this.dateOfRelease = dateOfRelease;
+        this.price = price;
+        this.owner = owner;
     }
-    const ordersContainer = document.querySelector(".ordersContainer");
-    ordersContainer.remove();
-    showOrders();
+    showCar() {
+        console.log("The car is", this.brand, this.model, this.dateOfRelease, this.price, "and it is owned by", this.owner.name)
+    }
 }
-const ordersButton = document.querySelector(".ordersButton");
-ordersButton.addEventListener("click", showOrders);
-const buyButtons = document.querySelectorAll(".buyButton");
-buyButtons.forEach(button => {
-    button.addEventListener("click", (event) => {
-        const productId = parseInt(event.target.dataset.id);
-        addOrder(productId);
-    });
-});
+function getValidInput(message) {
+    let input;
+    do {
+        input = prompt(message)
+    } while (input === "" || input === null);
+    return input;
+}
+const userName = getValidInput("Enter your name");
+const userAge = getValidInput("Enter your age");
+if (Number(userAge) < 18) {
+    throw new Error(alert("You have to be 18 years old at least to own a car"));
+}
+const person1 = new Person(userName, userAge);
+person1.showPerson();
+const userCarBrand = getValidInput("Enter your car brand");
+const userCarModel = getValidInput("Enter your car model");
+const userCarDateOfRelease = getValidInput("What year was your car assembled?");
+const userCarPrice = getValidInput("How much your car costs?");
+const car1 = new Car(userCarBrand, userCarModel, userCarDateOfRelease, userCarPrice, person1);
+car1.showCar();
