@@ -8,6 +8,28 @@
 </head>
 
 <body>
+    <div class="container">
+        <button class="createHouseBtn">Create a house</button>
+        <form class="createHouseForm" style="display: none;">
+            <label for="flats">How many flats should be in this house?</label>
+            <select name="flats" id="flats">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br>
+            <label for="peaple">How many peaple should live in each flat?</label>
+            <select name="peaple" id="peaple">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <br>
+            <input type="submit" value="Create" id="create">
+        </form>
+    </div>
     <script src="./index.js"></script>
 </body>
 

@@ -1,41 +1,30 @@
-class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
+const createHouseBtn = document.querySelector(".createHouseBtn").addEventListener("click", showHouseForm);
+const createHouseForm = document.querySelector(".createHouseForm");
+function showHouseForm(event) {
+    event.preventDefault();
+    createHouseForm.style.display = "block";
+}
+const numberOfFlats = document.querySelector("#flats");
+const peapleInEachFlat = document.querySelector("#peaple");
+const create = document.querySelector("#create").addEventListener("click", showResult);
+let flats;
+let peaple;
+let house1;
+const totalPeaple = () => flats*peaple;
+function showResult(event) {
+    event.preventDefault();
+    flats = parseInt(numberOfFlats.value);
+    peaple = parseInt(peapleInEachFlat.value);
+    house1 = new House(flats, peaple);
+    house1.showHouse();
+    console.log(`And in this house live ${totalPeaple()} peaple at all.`)
+}
+class House {
+    constructor(flats, peaple) {
+        this.flats = flats;
+        this.peaple = peaple;
     }
-    showPerson() {
-        console.log(`Hello ${this.name}, you are ${this.age} years old`)
+    showHouse() {
+        console.log(`Ok, here is(are) ${flats} flat(s) it the house with ${peaple} peaple(person) in each flat.`);
     }
 }
-class Car {
-    constructor(brand, model, dateOfRelease, price, owner) {
-        this.brand = brand;
-        this.model = model;
-        this.dateOfRelease = dateOfRelease;
-        this.price = price;
-        this.owner = owner;
-    }
-    showCar() {
-        console.log("The car is", this.brand, this.model, this.dateOfRelease, this.price, "and it is owned by", this.owner.name)
-    }
-}
-function getValidInput(message) {
-    let input;
-    do {
-        input = prompt(message)
-    } while (input === "" || input === null);
-    return input;
-}
-const userName = getValidInput("Enter your name");
-const userAge = getValidInput("Enter your age");
-if (Number(userAge) < 18) {
-    throw new Error(alert("You have to be 18 years old at least to own a car"));
-}
-const person1 = new Person(userName, userAge);
-person1.showPerson();
-const userCarBrand = getValidInput("Enter your car brand");
-const userCarModel = getValidInput("Enter your car model");
-const userCarDateOfRelease = getValidInput("What year was your car assembled?");
-const userCarPrice = getValidInput("How much your car costs?");
-const car1 = new Car(userCarBrand, userCarModel, userCarDateOfRelease, userCarPrice, person1);
-car1.showCar();
