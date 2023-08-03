@@ -1,29 +1,50 @@
-class Burger {
-    constructor(size, stuffing) {
-        this.size = size;
-        this.stuffing = stuffing;
-        this.topping = [];
+class Student {
+    constructor(name, surmane, yearOfBitrh) {
+        this.name = name;
+        this.surmane = surmane;
+        this.yearOfBitrh = yearOfBitrh;
+        this.grades = [];
+        this.visit = [];
     }
-    static sizeSmall = {price: 50, calories: 20};
-    static sizeBig = {price: 100, calories: 40};
-    static withCheese = {price: 10, calories: 20};
-    static withSalad = {price: 20, calories: 5};
-    static withPotato = {price: 15, calories: 10};
-    static toppingSpice = {price: 15, calories: 0};
-    static toppingMayo = {price: 20, calories: 5};
-    addTopping(topping) {
-        this.topping.push(topping);
+    get age() {
+        const ageOfStudent = 2023 - this.yearOfBirth;
+        return ageOfStudent;
     }
-    calcPrice() {
-        const totalPrice = this.size.price + this.stuffing.price + this.topping.reduce((accum, topping) => accum + topping.price, 0);
-        return totalPrice;
+    get avarageGrade() {
+        const allGrades = this.grades.reduce((accum, grade) => accum + grade, 0);
+        const middlePoint = allGrades / this.grades.length;
+        return middlePoint;
     }
-    calcCalories() {
-        const totalCalories = this.size.calories + this.stuffing.calories + this.topping.reduce((accum, topping) => accum + topping.calories, 0);
-        return totalCalories;
+    present() {
+        if (this.visit.length > 25) {
+            throw new Error(console.log("Error"))
+        } else {
+            this.visit.push(true);
+        }
+        return this;
+    }
+    absent() {
+        if (this.visit.length > 25) {
+            throw new Error(console.log("Error"))
+        } else {
+            this.visit.push(false);
+        }
+        return this;
+    }
+    summary() {
+        const averageVisit = this.visit.filter(Boolean).length / this.visit.length;
+        if (this.avarageGrade > 90 && averageVisit > 0.9) {
+            console.log("Good Job!");
+        } else if (this.avarageGrade > 90 || averageVisit > 0.9) {
+            console.log("Good, but you can always be better.");
+        } else {
+            console.log("Not good at all.");
+        }
     }
 }
-const burger1 = new Burger(Burger.sizeBig, Burger.withCheese);
-burger1.addTopping(Burger.toppingSpice);
-console.log("Price: " + burger1.calcPrice());
-console.log("Calories: " + burger1.calcCalories());
+const student1 = new Student("Alex", "Tompson", 2001);
+const student2 = new Student("John", "Mitchel", 1998);
+console.log(student1);
+student1.present().present().absent().present();
+console.log(student1);
+student1.summary();
